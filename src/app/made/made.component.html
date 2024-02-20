@@ -1,0 +1,89 @@
+<div class="content-container">
+  <div align="right" class="searchTable">
+    <input type="text" [(ngModel)]="searchValue" (input)="updateFilter($event)" />
+
+  </div>
+  <ngx-datatable
+  #table
+  class="material"
+  [columnMode]="ColumnMode.force"
+  [selectionType]="SelectionType.checkbox"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [rowHeight]="'auto'"
+  [scrollbarH]="true"
+  [limit]="5"
+  [rows]="rows"
+  (select)="onSelect($event)"
+  >
+
+    <ngx-datatable-column
+      [width]="30"
+      [sortable]="false"
+      [canAutoResize]="false"
+      [draggable]="false"
+      [resizeable]="false"
+      [headerCheckboxable]="true"
+      [checkboxable]="true"
+      >
+    </ngx-datatable-column>
+
+    <ngx-datatable-column prop = "id">
+      <ng-template
+        let-row="column"
+        ngx-datatable-header-template
+        let-sort="sortFn"
+      >
+        <span class="tableHeader">ID</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column prop="name">
+      <ng-template
+        let-row="column"
+        ngx-datatable-header-template
+        let-sort="sortFn">
+        <span class="tableHeader">Name</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column prop="gender">
+      <ng-template
+        let-row="column"
+        ngx-datatable-header-template
+        let-sort="sortFn"
+        >
+        <span class="tableHeader">Gender</span>
+      </ng-template>
+      <ng-template
+        let-row="row"
+        ngx-datatable-cell-template
+        >
+          {{ row?.gender }}
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column prop="company">
+      <ng-template
+        let-row="column"
+        ngx-datatable-header-template
+        let-sort="sortFn"
+        >
+        <span class="tableHeader">Company</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column>
+      <!-- [frozenRight]="true" -->
+      <ng-template ngx-datatable-header-template>
+        <span class="tableHeader">Actions</span>
+      </ng-template>
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button style="border-radius: 10px; background-color: #fff; margin-right: 10px; align-items: center;" (click)="edit(row)">Edit</button>
+        <button style="border-radius: 10px; background-color: #fff; align-items: center;" (click)="deleteItem(row)">Delete</button>
+      </ng-template>
+    </ngx-datatable-column>
+
+  </ngx-datatable>
+</div>
+
